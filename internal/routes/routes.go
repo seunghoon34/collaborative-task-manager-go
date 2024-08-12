@@ -25,6 +25,10 @@ func SetupRoutes(r *gin.Engine) {
 		protected.POST("/todos", handlers.CreateTodo)
 		protected.PUT("/todos/:id", handlers.UpdateTodo)
 		protected.DELETE("/todos/:id", handlers.DeleteTodo)
+		protected.POST("/teams", handlers.CreateTeam)
+		protected.POST("/teams/join/:joinCode", handlers.JoinTeam)
+		protected.GET("/teams/:id", handlers.GetTeam)
+		protected.GET("/teams", handlers.ListUserTeams)
 	}
 
 	r.NoRoute(func(c *gin.Context) {
