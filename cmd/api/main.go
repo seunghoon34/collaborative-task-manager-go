@@ -22,6 +22,12 @@ func main() {
 	// Setup routes
 	routes.SetupRoutes(r)
 
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+
 	// Start the server
 	if err := r.Run(":8080"); err != nil {
 		log.Fatal("Failed to start server:", err)

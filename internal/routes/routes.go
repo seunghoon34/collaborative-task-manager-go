@@ -26,4 +26,12 @@ func SetupRoutes(r *gin.Engine) {
 		protected.PUT("/todos/:id", handlers.UpdateTodo)
 		protected.DELETE("/todos/:id", handlers.DeleteTodo)
 	}
+
+	r.NoRoute(func(c *gin.Context) {
+		c.JSON(404, gin.H{
+			"error":  "Route not found",
+			"method": c.Request.Method,
+			"path":   c.Request.URL.Path,
+		})
+	})
 }
