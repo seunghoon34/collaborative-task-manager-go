@@ -30,10 +30,3 @@ This project is a simple todo list application that allows users to create, read
 - PUT `/todos/:id`: Update an existing todo
 - DELETE `/todos/:id`: Delete a todo
 
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
