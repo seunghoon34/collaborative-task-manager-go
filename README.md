@@ -32,9 +32,9 @@ This project is a task management application that allows users to create, read,
 - POST `/signin`: Authenticate and receive a JWT
 - POST `/logout`: Log out (client-side token removal)
 - GET `/todos`: Retrieve todos (with filtering and sorting)
-- POST `/todos`: Create a new todo
+- POST `/todos`: Create a new task
 - PUT `/todos/:id`: Update an existing todo
-- DELETE `/todos/:id`: Delete a todo
+- DELETE `/todos/:id`: Delete a task
 - POST `/teams`: Create a new team
 - GET `/teams`: List user's teams
 - POST `/teams/join/:joinCode`: Join a team
