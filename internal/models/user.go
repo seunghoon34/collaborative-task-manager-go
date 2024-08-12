@@ -7,4 +7,5 @@ type User struct {
 	Username string `json:"username"`
 	Password string `json:"-"`
 	Email    string `json:"email"`
+	Teams    []Team `gorm:"many2many:team_users;"`
 }
