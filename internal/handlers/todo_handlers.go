@@ -32,6 +32,11 @@ func CreateTodo(c *gin.Context) {
 		return
 	}
 
+	if todo.Title == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Todo title cannot be empty"})
+		return
+	}
+
 	username := c.GetString("username")
 	var user models.User
 	if err := database.DB.Where("username = ?", username).First(&user).Error; err != nil {
@@ -49,14 +54,27 @@ func CreateTodo(c *gin.Context) {
 
 func UpdateTodo(c *gin.Context) {
 	id := c.Param("id")
+	username := c.GetString("username")
+
+	var user models.User
+	if err := database.DB.Where("username = ?", username).First(&user).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to find user"})
+		return
+	}
+
 	var todo models.Todo
-	if err := database.DB.First(&todo, id).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Todo not found"})
+	if err := database.DB.Where("id = ? AND user_id = ?", id, user.ID).First(&todo).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Todo not found or doesn't belong to user"})
 		return
 	}
 
 	if err := c.ShouldBindJSON(&todo); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if todo.Title == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Todo title cannot be empty"})
 		return
 	}
 
@@ -69,9 +87,17 @@ func UpdateTodo(c *gin.Context) {
 
 func DeleteTodo(c *gin.Context) {
 	id := c.Param("id")
+	username := c.GetString("username")
+
+	var user models.User
+	if err := database.DB.Where("username = ?", username).First(&user).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to find user"})
+		return
+	}
+
 	var todo models.Todo
-	if err := database.DB.First(&todo, id).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Todo not found"})
+	if err := database.DB.Where("id = ? AND user_id = ?", id, user.ID).First(&todo).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Todo not found or doesn't belong to user"})
 		return
 	}
 
