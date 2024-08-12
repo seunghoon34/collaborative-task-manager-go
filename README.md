@@ -21,9 +21,9 @@ This project is a task management application that allows users to create, read,
 
 1. Sign up for a new account or sign in with existing credentials.
 2. Create a new team or join an existing team using a join code.
-3. Add new tasks, specifying title, deadline, priority, and whether it's a personal or team todo.
+3. Add new tasks, specifying title, deadline, priority, and whether it's a personal or team task.
 4. View, edit, and delete tasks as needed.
-5. Use filters and sorting options to organize your todo list.
+5. Use filters and sorting options to organize your task list.
 
 
 ## API Endpoints
